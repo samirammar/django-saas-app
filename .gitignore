@@ -1,6 +1,7 @@
 # Folders
 venv/
-
+src/staticfiles/vendors
+local-cdn/
 
 # Files
 .env
