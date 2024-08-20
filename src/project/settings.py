@@ -88,11 +88,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('PGDATABASE'),
-        'USER': config('PGUSER'),
-        'PASSWORD': config('PGPASSWORD'),
+        'NAME': config('PGDATABASE', cast=str),
+        'USER': config('PGUSER', cast=str),
+        'PASSWORD': config('PGPASSWORD', cast=str),
         'HOST': config('PGHOST'),
-        'PORT': config('PGPORT', 5432),
+        'PORT': config('PGPORT', cast=int, default=5432),
         'OPTIONS': {
             'sslmode': 'require',
         },
