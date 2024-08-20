@@ -47,7 +47,10 @@ ARG DJANGO_SECRET_KEY
 ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 ARG DJANGO_DEBUG=0
 ENV DJANGO_DEBUG=${DJANGO_DEBUG}
-
+ENV PGHOST='ep-fragrant-frost-a6c00fwx.us-west-2.aws.neon.tech'
+ENV PGDATABASE='saas'
+ENV PGUSER='saas_owner'
+ENV PGPASSWORD='43RjJVqMwoyk'
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
