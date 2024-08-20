@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'commando',
+    'visits'
 ]
 
 MIDDLEWARE = [
@@ -85,8 +87,15 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('PGDATABASE'),
+        'USER': config('PGUSER'),
+        'PASSWORD': config('PGPASSWORD'),
+        'HOST': config('PGHOST'),
+        'PORT': config('PGPORT', 5432),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
@@ -125,14 +134,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_BASE_DIR = BASE_DIR / 'staticfiles'
 
-STATIC_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / "local-cdn"
+STATICFILES_BASE_DIR.mkdir(exist_ok=True, parents=True)
+STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / 'vendors'
+
+STATICFILES_DIRS = [
+    STATICFILES_BASE_DIR
 ]
+
 
 # Media files
 
+MEDIA_URL = '/media/'
 MEDIA_DIRS = [
     os.path.join(BASE_DIR, 'media')
 ]
